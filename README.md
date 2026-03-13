@@ -31,10 +31,10 @@ La carpeta Resultados es el núcleo de la validación. La elección de la config
 ## Estructura del Repositorio
 
 ```text
-├── data/                # Dataset: Imágenes Raw, Segmentadas y Filtradas.
-├── scripts/             # Código fuente del proyecto.
-│   └── Finales/         # Pipeline definitivo de extracción y calificación.
-├── Resultados/          # Boxplots y Gráficas de barras para selección de filtro y grado.
-├── Pruebas/             # Experimentos previos y archivos CSV.
-├── requirements.txt     # Dependencias
-└── README.md            # Documentación del proyecto.
+├── data/                Dataset: Imágenes Raw, Segmentadas y Filtradas.
+├── scripts/             Código fuente del proyecto.
+│   └── Finales/         Pipeline definitivo de extracción y calificación.
+├── Resultados/          Boxplots y Gráficas de barras para selección de filtro y grado.
+├── Pruebas/             Experimentos previos y archivos CSV.
+├── requirements.txt     Dependencias
+└── README.md            Documentación del proyecto.
