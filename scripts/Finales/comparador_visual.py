@@ -7,6 +7,7 @@ def generar_diagnostico_final_visible(path_chef, path_alumno):
     img_alumno = cv2.imread(path_alumno)
     if img_chef is None or img_alumno is None: return
 
+    # --- Procesamiento de Color ---
     lab_chef = cv2.cvtColor(img_chef, cv2.COLOR_BGR2LAB)
     lab_alumno = cv2.cvtColor(img_alumno, cv2.COLOR_BGR2LAB)
     _, a_c, _ = cv2.split(lab_chef)
@@ -35,8 +36,17 @@ def generar_diagnostico_final_visible(path_chef, path_alumno):
             x, y, w, h = cv2.boundingRect(c)
             cv2.rectangle(resultado, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
-    #cv2.imshow("1. Diferencias (BN)", mapa_bn_filtrado)
-    cv2.imshow("Diferencias", resultado)
+    # --- PREPARACIÓN VISUAL 
+    alto, ancho = img_chef.shape[:2]
+    resultado = cv2.resize(resultado, (ancho, alto))
+
+    cv2.putText(img_chef, "referencia", (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+    cv2.putText(resultado, "alumno", (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+
+    separador = np.zeros((alto, 30, 3), dtype=np.uint8)
+
+    comparativa_final = cv2.hconcat([img_chef, separador, resultado])
+    cv2.imshow("Diagnostico Comparativo", comparativa_final)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -46,4 +56,3 @@ p_chef = os.path.join(base, "chef/chef_version_1_cleaned_morph_aligned.png")
 p_bueno = os.path.join(base, "feo/feo_version_1_cleaned_morph_aligned.png")
 
 generar_diagnostico_final_visible(p_chef, p_bueno)
-
